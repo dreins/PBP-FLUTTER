@@ -1,4 +1,4 @@
-import 'package:pbp_flutter/form.dart';
+import 'main.dart';
 import 'package:flutter/material.dart';
 
 class MyFormPage extends StatefulWidget {
@@ -24,6 +24,33 @@ class _MyFormPageState extends State<MyFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Form'),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: const Text('Counter'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Form'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyFormPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -203,23 +230,80 @@ class _MyFormPageState extends State<MyFormPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 15,
-                            child: Container(
-                              child: ListView(
-                                padding:
-                                    const EdgeInsets.only(top: 20, bottom: 20),
-                                shrinkWrap: true,
-                                children: <Widget>[
-                                  Center(child: const Text('Informasi Data')),
-                                  SizedBox(height: 20),
-                                  // TODO: Munculkan informasi yang didapat dari form
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Kembali'),
+                            child: ListView(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                const Center(child: Text('Informasi Data')),
+                                const SizedBox(height: 20),
+                                const Center(
+                                    child: Text(
+                                  "Informasi Data",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
                                   ),
-                                ],
-                              ),
+                                )),
+                                const SizedBox(height: 20),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Nama: $_namaLengkap',
+                                        style: const TextStyle(
+                                          color: Colors.black12,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Umur: ' '${umur.toInt()}',
+                                        style: const TextStyle(
+                                          color: Colors.black12,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Jenjang: ${jenjangSarjana ? 'Sarjana' : jenjangDiploma ? 'Diploma' : jenjangMagister ? 'Magister' : jenjangDoktor ? 'Doktor' : 'Undefined'}',
+                                        style: const TextStyle(
+                                          color: Colors.black12,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Kelas PBP: $kelasPBP',
+                                        style: const TextStyle(
+                                          color: Colors.black12,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Practice Mode: ${_nilaiSwitch ? 'yes' : 'no'}',
+                                        style: const TextStyle(
+                                          color: Colors.black12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kembali'),
+                                ),
+                              ],
                             ),
                           );
                         },
